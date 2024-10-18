@@ -144,8 +144,8 @@ class ImageProfiles extends React.Component<Props, State> {
             id="create"
             icon="fa-plus"
             className="btn-primary"
-            title={t("Create")}
-            text={t("Create")}
+            title={t("Create Image Profiles")}
+            text={t("Create Image Profiles")}
             href="/rhn/manager/cm/imageprofiles/create"
           />
         )}
