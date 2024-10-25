@@ -74,6 +74,31 @@
   }
 }
 
+.btn-unstyled {
+  background: none;
+  border: 0;
+  padding: 4px 8px;
+  color: @eos-bc-pine-500;
+  font-size: 16px;
+ 
+  i {
+    margin-right: 0;
+  }
+
+  &:active,
+  &:focus,
+  &:hover:not(:disabled):not(.disabled) {
+    color: @eos-bc-green-900;
+  }
+
+  &.disabled,
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: auto;
+    cursor: not-allowed;
+  }
+}
+
 .btn-link {
   &,
   &:active,
@@ -200,9 +225,8 @@
 
 .panel-heading,
 th {
-  .btn,
   .btn-link,
-  a {
+  a:not(.btn-unstyled) {
     border: none;
     padding: 0;
     font-weight: bold;

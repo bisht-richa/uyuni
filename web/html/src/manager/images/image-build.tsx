@@ -3,7 +3,7 @@ import * as React from "react";
 import SpaRenderer from "core/spa/spa-renderer";
 
 import { ActionChain, ActionSchedule } from "components/action-schedule";
-import { LinkButton, SubmitButton } from "components/buttons";
+import { LinkButton, SubmitButton, Button } from "components/buttons";
 import { Select } from "components/input";
 import { Form } from "components/input/form/Form";
 import { FormGroup } from "components/input/FormGroup";
@@ -237,8 +237,24 @@ class BuildImage extends React.Component<Props, State> {
     return (
       <div className="col-md-5">
         <div className="panel panel-default">
-          <div className="panel-heading">
-            <h4>{t("Profile Summary")}</h4>
+          <div className="panel-heading d-flex">
+            <div className="col-md-8"> <h4>{t("Profile Summary")}</h4></div>
+            <div className="col-md-4 pull-right">
+              {pselected && (
+                <LinkButton
+                  title={t("Edit Profile Summary")}
+                  icon="fa-edit"
+                  className="pull-right"
+                  href={
+                    "/rhn/manager/cm/imageprofiles/edit/" +
+                    this.state.model.profileId +
+                    "?url_bounce=" +
+                    this.getBounceUrl()
+                  }
+                  unstyled
+                />
+              )}
+            </div>
           </div>
           <div className="panel-body">
             <div className="table-responsive">
@@ -318,19 +334,6 @@ class BuildImage extends React.Component<Props, State> {
                 )}
               </table>
             </div>
-            {pselected && (
-              <LinkButton
-                icon="fa-edit"
-                href={
-                  "/rhn/manager/cm/imageprofiles/edit/" +
-                  this.state.model.profileId +
-                  "?url_bounce=" +
-                  this.getBounceUrl()
-                }
-                className="btn-xs btn-default pull-right"
-                text="Edit"
-              />
-            )}
           </div>
         </div>
       </div>
