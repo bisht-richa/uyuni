@@ -422,7 +422,7 @@ public class ListTag extends BodyTagSupport {
         if (filter != null && manip.getUnfilteredDataSize() !=  0) {
             ListTagUtil.renderFilterSubmit(pageContext, getUniqueName());
         }
-        renderTopPaginationControls();
+        // renderTopPaginationControls();// pagination changes
         pageContext.popBody();
 
         pageContext.pushBody(topAddonsContent);
@@ -696,6 +696,7 @@ public class ListTag extends BodyTagSupport {
                     "<div class=\"spacewalk-list-footer-addons\">");
             ListTagUtil.write(pageContext,
                     "<div class=\"spacewalk-list-reflinks\">");
+                    renderTopPaginationControls();
             ListTagUtil.write(pageContext, footLinksContent.toString());
             ListTagUtil.write(pageContext, "</div>");
             ListTagUtil.write(pageContext,

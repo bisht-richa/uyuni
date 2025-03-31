@@ -801,7 +801,7 @@ public class ListDisplayTag extends ListDisplayTagBase {
 
             pageContext.pushBody(paginationContent);
             if (isPaging()) {
-                renderPagination(paginationContent, true);
+                renderPagination(paginationContent, false);
                 renderBoundsVariables(paginationContent);
             }
             pageContext.popBody();
@@ -878,7 +878,7 @@ public class ListDisplayTag extends ListDisplayTagBase {
             out.println("<div class=\"panel-footer\">");
             out.println("<div class=\"spacewalk-list-footer-addons\">");
             out.println("<div class=\"spacewalk-list-footer-addons-extra\">");
-            renderSetButtons(out);
+            // renderSetButtons(out); // pagination changes
             out.println("</div>");
             out.println("<div class=\"spacewalk-list-reflinks\">");
             if (reflink != null) {

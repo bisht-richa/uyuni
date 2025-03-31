@@ -146,7 +146,7 @@ const ListFilters = (props: Props) => {
         handler={deleteSelectedRows}
         text={t("Delete selected")}
       />
-    </div>
+    </div>,
   ];
 
   return (

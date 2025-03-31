@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { DEPRECATED_unsafeEquals } from "utils/legacy";
+import { Button, DropdownButton } from "components/buttons";
 
-import { DropdownButton } from "components/buttons";
+import { DEPRECATED_unsafeEquals } from "utils/legacy";
 type PaginationBlockProps = {
   currentPage: number;
   lastPage: number;
@@ -13,7 +13,6 @@ const PaginationBlock = (props: PaginationBlockProps) => {
   const currentPage = props.currentPage;
   const lastPage = props.lastPage;
   const onPageChange = props.onPageChange;
-  const doubleLeft = <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true" role="img" width="1em" height="1em"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34zm192-34l-136-136c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l96.4 96.4-96.4 96.4c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l136-136c9.4-9.2 9.4-24.4 0-33.8z"></path></svg>
   const pagination =
     lastPage > 1 ? (
       <div className="spacewalk-list-pagination">
@@ -58,11 +57,11 @@ type PaginationButtonProps = {
 };
 const PaginationButton = (props: PaginationButtonProps) => {
   return (
-
     <button type="button" className="btn btn-tertiary" disabled={props.disabled} onClick={props.onClick}>
-      <i className={`pagination-icon fa ${props.icon}`} />{props.text}
+      <i className={`pagination-icon fa ${props.icon}`} />
+      {props.text}
     </button>
-  )
+  );
 };
 
 type ItemsPerPageSelectorProps = {
@@ -76,22 +75,20 @@ type ItemsPerPageSelectorProps = {
 const ItemsPerPageSelector = (props: ItemsPerPageSelectorProps) => (
   <div>
     <DropdownButton
-      text={t("{from} - {to} of {total} Items", { from: props.fromItem, to: props.toItem, total: props.itemCount })}
+      text={t("{from} - {to} of {total} items", { from: props.fromItem, to: props.toItem, total: props.itemCount })}
       className="page-selector"
       items={[5, 10, 15, 25, 50, 100, 250, 500].map((o) => (
-        <a
+        <Button
           key={o}
-          href="#"
-          className="d-flex justify-content-between"
-          onClick={(e) => {
+          className="dropdown-item justify-content-between"
+          handler={(e) => {
             e.preventDefault();
             props.onChange(o);
           }}
         >
           <div>{o} per page</div>
-          <div>{props.currentValue === o ? <i className="fa fa-check" /> : null}
-          </div>
-        </a>
+          <div>{props.currentValue === o ? <i className="fa fa-check" /> : null}</div>
+        </Button>
       ))}
     />
   </div>
@@ -104,37 +101,29 @@ type PageSelectorProps = {
 };
 
 const PageSelector = (props: PageSelectorProps) => {
-  if (props.lastPage > 1) {
-    return (
-      <div className="table-page-information me-5">
-        {t("Page <dropdown></dropdown> of {total}", {
-          dropdown: () => (
-            <>
-              <select
-                className="display-number small-select"
-                value={props.currentValue}
-                onChange={(e) => props.onChange(parseInt(e.target.value, 10))}
-                key="select"
-              >
-                {Array.from(Array(props.lastPage)).map((_, i) => (
-                  <option value={i + 1} key={i + 1}>
-                    {i + 1}
-                  </option>
-                ))}
-              </select>
-            </>
-          ),
-          total: props.lastPage,
-        })}
-      </div>
-    );
-  } else {
-    return (
-      <div className="table-page-information me-5">
-        {t("Page {current} of {total}", { current: props.currentValue, total: props.lastPage })}
-      </div>
-    );
-  }
+  return props.lastPage > 1 ? (
+    <div className="table-page-information me-5">
+      {t("<dropdown></dropdown> of {total} pages", {
+        dropdown: () => (
+          <>
+            <select
+              className="display-number small-select"
+              value={props.currentValue}
+              onChange={(e) => props.onChange(parseInt(e.target.value, 10))}
+              key="select"
+            >
+              {Array.from(Array(props.lastPage)).map((_, i) => (
+                <option value={i + 1} key={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </>
+        ),
+        total: props.lastPage,
+      })}
+    </div>
+  ) : null;
 };
 
 export { PaginationBlock, ItemsPerPageSelector };
